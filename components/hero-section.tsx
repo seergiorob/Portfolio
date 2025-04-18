@@ -80,15 +80,15 @@ export default function HeroSection() {
           </Button>
         </div>
         <div className="animate-on-scroll stagger-5 flex items-center justify-center space-x-6">
-          <Link href="https://github.com" target="_blank" rel="noopener noreferrer">
+          <Link href="https://github.com/seergiorob" target="_blank" rel="noopener noreferrer">
             <Github className="h-6 w-6 text-foreground/70 hover:text-primary transition-colors" />
             <span className="sr-only">GitHub</span>
           </Link>
-          <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+          <Link href="https://www.linkedin.com/in/sergio-robledo-9b1a33187/" target="_blank" rel="noopener noreferrer">
             <Linkedin className="h-6 w-6 text-foreground/70 hover:text-primary transition-colors" />
             <span className="sr-only">LinkedIn</span>
           </Link>
-          <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+          <Link href="https://x.com/seergiorobledo" target="_blank" rel="noopener noreferrer">
             <Twitter className="h-6 w-6 text-foreground/70 hover:text-primary transition-colors" />
             <span className="sr-only">Twitter</span>
           </Link>
