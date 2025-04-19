@@ -72,10 +72,6 @@ export default function BlogSection() {
 
   return (
     <section id="blog" ref={sectionRef} className="py-20 px-4 sm:px-6 lg:px-8 relative">
-      {/* Decorative typography */}
-      <div className="absolute right-[5%] top-[20%] text-[15vw] font-black opacity-[0.02] select-none pointer-events-none tracking-tighter rotate-90">
-        BLOG
-      </div>
 
       <div className="max-w-6xl mx-auto">
         <SectionHeading

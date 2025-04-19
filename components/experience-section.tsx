@@ -79,10 +79,7 @@ export default function ExperienceSection() {
 
   return (
     <section id="experience" ref={sectionRef} className="py-20 px-4 sm:px-6 lg:px-8 bg-secondary/20 relative">
-      {/* Decorative typography */}
-      <div className="absolute right-[5%] top-[20%] text-[15vw] font-black opacity-[0.02] select-none pointer-events-none tracking-tighter rotate-90">
-        WORK EXPERIENCE
-      </div>
+     
 
       <div className="max-w-6xl mx-auto">
         <SectionHeading

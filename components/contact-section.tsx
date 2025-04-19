@@ -41,10 +41,7 @@ export default function ContactSection() {
 
   return (
     <section id="contact" ref={sectionRef} className="py-20 px-4 sm:px-6 lg:px-8 relative">
-      {/* Decorative typography */}
-      <div className="absolute left-[5%] bottom-[10%] text-[15vw] font-black opacity-[0.02] select-none pointer-events-none tracking-tighter">
-        HELLO
-      </div>
+    
 
       <div className="max-w-6xl mx-auto">
         <SectionHeading
