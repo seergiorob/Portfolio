@@ -14,7 +14,11 @@ const geist = Geist({
 export const metadata: Metadata = {
   title: "Sergio Robledo | Software Engineer",
   description: "Professional portfolio of Sergio Robledo, Software Engineer",
-    // generator: 'v0.dev'
+  icons: {
+    icon: [
+      { url: "/favicon-32x32.png", sizes: "32x32" },
+    ],
+  },
 }
 
 export default function RootLayout({
