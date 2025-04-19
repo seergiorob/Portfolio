@@ -50,8 +50,10 @@ export default function Navbar() {
                 {item.name}
               </Link>
             ))}
-            <Button variant="outline" className="border-primary text-primary">
-              Resume
+            <Button variant="outline" className="border-primary text-primary" asChild>
+              <a href="https://drive.google.com/file/d/1-EsyIGDqw-zvAQsONtGNfaivH6GcHMBc/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+                Resume
+              </a>
             </Button>
           </nav>
 
@@ -84,8 +86,10 @@ export default function Navbar() {
               </Link>
             ))}
             <div className="px-3 py-2">
-              <Button variant="outline" className="w-full border-primary text-primary">
-                Resume
+              <Button variant="outline" className="w-full border-primary text-primary" asChild>
+                <a href="https://drive.google.com/file/d/1-EsyIGDqw-zvAQsONtGNfaivH6GcHMBc/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+                  Resume
+                </a>
               </Button>
             </div>
           </div>

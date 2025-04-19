@@ -36,13 +36,13 @@ export default function HeroSection() {
     >
       {/* Decorative typography background */}
       <div className="fixed inset-0 -z-10 overflow-hidden select-none pointer-events-none">
-        <div className="absolute top-[10%] left-0 w-full text-center">
+        <div className="absolute top-[03%] left-0 w-full text-center">
           <span className="text-[15vw] font-black tracking-tighter text-primary/[0.03] blur-sm">CODE</span>
         </div>
-        <div className="absolute top-[40%] left-0 w-full text-center">
+        <div className="absolute top-[35%] left-0 w-full text-center">
           <span className="text-[15vw] font-black tracking-tighter text-primary/[0.03] blur-sm">DEV</span>
         </div>
-        <div className="absolute top-[70%] left-0 w-full text-center">
+        <div className="absolute top-[65%] left-0 w-full text-center">
           <span className="text-[15vw] font-black tracking-tighter text-primary/[0.03] blur-sm">WEB</span>
         </div>
       </div>
@@ -74,10 +74,12 @@ export default function HeroSection() {
             <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Button> */}
           <div></div>
-          <Button  size="lg">
-            Contact Me
-            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </Button>
+          <Link href="#contact">
+            <Button size="lg">
+              Contact Me
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </Link>
         </div>
         <div className="animate-on-scroll stagger-5 flex items-center justify-center space-x-6">
           <Link href="https://github.com/seergiorob" target="_blank" rel="noopener noreferrer">

@@ -47,11 +47,12 @@ export default function AboutSection() {
           <div className="animate-on-scroll stagger-1 relative mx-auto md:ml-auto">
             <div className="w-64 h-64 sm:w-80 sm:h-80 relative rounded-lg overflow-hidden border-2 border-primary/20">
               <Image
-                src="/placeholder.svg?height=320&width=320"
+                src="/images/profile.jpg"
                 alt="Sergio Robledo"
                 width={320}
                 height={320}
                 className="object-cover"
+                priority
               />
             </div>
             <div className="absolute -bottom-4 -right-4 w-full h-full border-2 border-primary rounded-lg -z-10"></div>
