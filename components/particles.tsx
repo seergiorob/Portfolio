@@ -40,9 +40,9 @@ export default function Particles() {
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          size: Math.random() * 7 + 2,
-          speedX: Math.random() * 0.5 - 0.25,
-          speedY: Math.random() * 0.5 - 0.25,
+          size: Math.random() * 10 + 2,
+          speedX: Math.random() * 0.2 - 0.1,
+          speedY: Math.random() * 0.2 - 0.1,
           opacity: Math.random() * 0.1 + 0.9,
         });
       }
@@ -64,7 +64,7 @@ export default function Particles() {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      particlesRef.current.forEach((particle) => {
+      particlesRef.current.forEach((particle, index) => {
         // Update position
         particle.x += particle.speedX;
         particle.y += particle.speedY;
@@ -72,6 +72,30 @@ export default function Particles() {
         // Bounce off edges
         if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
         if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
+
+        // Check collisions with other particles
+        for (let j = index + 1; j < particlesRef.current.length; j++) {
+          const otherParticle = particlesRef.current[j];
+          const dx = otherParticle.x - particle.x;
+          const dy = otherParticle.y - particle.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          const minDistance = particle.size + otherParticle.size;
+
+          if (distance < minDistance) {
+            // Collision response
+            const angle = Math.atan2(dy, dx);
+            const targetX = particle.x + Math.cos(angle) * minDistance;
+            const targetY = particle.y + Math.sin(angle) * minDistance;
+            
+            const ax = (targetX - otherParticle.x) * 0.02;
+            const ay = (targetY - otherParticle.y) * 0.02;
+            
+            particle.speedX -= ax;
+            particle.speedY -= ay;
+            otherParticle.speedX += ax;
+            otherParticle.speedY += ay;
+          }
+        }
 
         // Mouse interaction
         const dx = mouseRef.current.x - particle.x;
@@ -107,7 +131,10 @@ export default function Particles() {
     <canvas
       ref={canvasRef}
       className="fixed top-0 left-0 w-full h-full pointer-events-none z-0"
-      style={{ mixBlendMode: 'overlay' }}
+      style={{ 
+        mixBlendMode: 'overlay',
+        filter: 'blur(2px)'
+      }}
     />
   );
 } 
