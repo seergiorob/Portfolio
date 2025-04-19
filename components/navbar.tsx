@@ -33,7 +33,7 @@ export default function Navbar() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex-shrink-0">
-            <Link href="#home" className="text-xl font-bold text-primary tracking-tight relative group">
+            <Link href="/" className="text-xl font-bold text-primary tracking-tight relative group">
               <span className="font-mono">SR</span>
               <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary/50 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
             </Link>
