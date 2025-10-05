@@ -9,6 +9,8 @@ import TypographicDivider from "./typographic-divider"
 export default function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null)
 
+  console.log('test');
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
