@@ -2,26 +2,48 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 
 const navItems = [
-  { name: "Work", href: "#about" },
-  { name: "Archive", href: "/blog" },
-  { name: "About", href: "#about" },
-  { name: "Contact", href: "#contact" },
+  { name: "Work", href: "#experience", section: "experience" },
+  { name: "Blog", href: "/blog", section: null },
+  { name: "About", href: "#about", section: "about" },
+  { name: "Contact", href: "#contact", section: "contact" },
 ]
 
 export default function Navbar() {
+  const pathname = usePathname()
+  const isHome = pathname === "/"
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [activeItem, setActiveItem] = useState("Work")
+  const [activeSection, setActiveSection] = useState("")
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
-    }
+    const handleScroll = () => setIsScrolled(window.scrollY > 10)
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  // Highlight nav item based on which section is in view
+  useEffect(() => {
+    const sectionIds = navItems.map((i) => i.section).filter(Boolean) as string[]
+    const observers: IntersectionObserver[] = []
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id)
+      if (!el) return
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveSection(id)
+        },
+        { threshold: 0.3 }
+      )
+      observer.observe(el)
+      observers.push(observer)
+    })
+
+    return () => observers.forEach((o) => o.disconnect())
   }, [])
 
   return (
@@ -37,20 +59,26 @@ export default function Navbar() {
 
         {/* Desktop navigation */}
         <nav className="hidden md:flex items-center gap-12">
-          {navItems.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              onClick={() => setActiveItem(item.name)}
-              className={`font-headline uppercase tracking-tighter font-bold transition-colors text-sm ${
-                activeItem === item.name
-                  ? "text-primary border-b-2 border-primary pb-1"
-                  : "text-slate-400 hover:text-white"
-              }`}
-            >
-              {item.name}
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            const href = item.section && !isHome ? `/${item.href}` : item.href
+            const isActive = item.section
+              ? activeSection === item.section
+              : pathname.startsWith(item.href)
+            return (
+              <Link
+                key={item.name}
+                href={href}
+                onClick={() => item.section && setActiveSection(item.section)}
+                className={`font-headline uppercase tracking-tighter font-bold transition-colors text-sm ${
+                  isActive
+                    ? "text-primary border-b-2 border-primary pb-1"
+                    : "text-slate-400 hover:text-white"
+                }`}
+              >
+                {item.name}
+              </Link>
+            )
+          })}
         </nav>
 
         <a
@@ -79,10 +107,10 @@ export default function Navbar() {
             {navItems.map((item) => (
               <Link
                 key={item.name}
-                href={item.href}
+                href={item.section && !isHome ? `/${item.href}` : item.href}
                 className="block font-headline uppercase tracking-tighter font-bold text-slate-400 hover:text-white transition-colors"
                 onClick={() => {
-                  setActiveItem(item.name)
+                  if (item.section) setActiveSection(item.section)
                   setMobileMenuOpen(false)
                 }}
               >
