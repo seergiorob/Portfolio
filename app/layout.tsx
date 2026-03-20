@@ -1,24 +1,28 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Geist } from "next/font/google"
-import "./globals.css"
+import { Space_Grotesk, Inter } from "next/font/google"
+import "../styles/globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
-import Particles from "@/components/particles"
 
-const geist = Geist({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   display: "swap",
+  variable: "--font-space-grotesk",
+})
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
 })
 
 export const metadata: Metadata = {
   title: "Sergio Robledo | Software Engineer",
   description: "Professional portfolio of Sergio Robledo, Software Engineer",
   icons: {
-    icon: [
-      { url: "/favicon-32x32.png", sizes: "32x32" },
-    ],
+    icon: [{ url: "/favicon-32x32.png", sizes: "32x32" }],
   },
 }
 
@@ -29,10 +33,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geist.className} antialiased`}>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        />
+      </head>
+      <body className={`${spaceGrotesk.variable} ${inter.variable} font-body antialiased overflow-x-hidden`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
-          <Particles />
-          <div className="flex min-h-screen flex-col relative z-10">
+          <div className="flex min-h-screen flex-col">
             <Navbar />
             <main className="flex-1">{children}</main>
             <Footer />
