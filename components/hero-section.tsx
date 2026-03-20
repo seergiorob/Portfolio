@@ -1,99 +1,51 @@
 "use client"
 
-import { useEffect, useRef } from "react"
-import { Button } from "@/components/ui/button"
-import { ArrowRight, Github, Linkedin, Twitter } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 
 export default function HeroSection() {
-  const containerRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("slide-in")
-          }
-        })
-      },
-      { threshold: 0.1 },
-    )
-
-    const elements = containerRef.current?.querySelectorAll(".animate-on-scroll")
-    elements?.forEach((el) => observer.observe(el))
-
-    return () => {
-      elements?.forEach((el) => observer.unobserve(el))
-    }
-  }, [])
-
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center pt-16 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
-      ref={containerRef}
+      className="px-8 pt-40 pb-24 relative overflow-hidden"
     >
-      {/* Decorative typography background */}
-      <div className="fixed inset-0 -z-10 overflow-hidden select-none pointer-events-none">
-        <div className="absolute top-[03%] left-0 w-full text-center">
-          <span className="text-[15vw] font-black tracking-tighter text-primary/[0.03] blur-sm">CODE</span>
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-end gap-12">
+        {/* Text side */}
+        <div className="w-full md:w-2/3">
+          <div className="text-primary font-mono text-sm tracking-[0.3em] mb-4 uppercase">
+            Engineering the Future
+          </div>
+          <h1
+            className="font-headline font-extrabold leading-[0.85] tracking-tighter uppercase mb-8 text-white"
+            style={{ fontSize: "clamp(3.5rem, 10vw, 8rem)" }}
+          >
+            Sergio
+            <br />
+            Robledo
+          </h1>
+          <p className="text-2xl md:text-3xl font-headline font-light text-[#bcc9cd] max-w-xl border-l-4 border-primary pl-6 mb-10">
+            Software Engineer at{" "}
+            <span className="text-white font-bold">Mercado Libre</span>.
+            Building robust frontend ecosystems and high-performance applications.
+          </p>
+          <Link
+            href="#contact"
+            className="inline-block bg-primary text-[#003640] px-8 py-4 font-headline font-black uppercase tracking-widest text-sm hover:bg-[#06b6d4] transition-colors duration-300"
+          >
+            Start a Project
+          </Link>
         </div>
-        <div className="absolute top-[35%] left-0 w-full text-center">
-          <span className="text-[15vw] font-black tracking-tighter text-primary/[0.03] blur-sm">DEV</span>
-        </div>
-        <div className="absolute top-[65%] left-0 w-full text-center">
-          <span className="text-[15vw] font-black tracking-tighter text-primary/[0.03] blur-sm">WEB</span>
-        </div>
-      </div>
 
-      <div className="max-w-4xl mx-auto text-center relative z-10">
-        <p className="animate-on-scroll stagger-1 text-primary font-medium mb-4 tracking-widest uppercase">
-          Hello, my name is
-        </p>
-        <h1 className="animate-on-scroll stagger-2 text-4xl sm:text-5xl md:text-6xl font-bold mb-6 relative">
-          <span className="relative inline-block">
-            <span className="relative z-10">Sergio Robledo</span>
-            <span className="absolute -bottom-2 left-0 w-full h-2 bg-primary/30"></span>
-          </span>
-        </h1>
-        <div className="animate-on-scroll stagger-3 mb-8 relative">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground/80 tracking-tight">
-            Software Engineer at <span className="text-primary italic">Mercado Libre</span>
-          </h2>
-          <p className="text-lg mt-2 text-foreground/70">TypeScript | JavaScript | React JS | Next JS | Node JS</p>
-          <div className="absolute -right-4 top-0 text-6xl font-black text-primary/10 -rotate-12">&lt;/&gt;</div>
-        </div>
-        <p className="animate-on-scroll stagger-4 text-lg text-foreground/70 max-w-2xl mx-auto mb-10">
-          A frontend developer with a passion for creating visually appealing and user-friendly web applications. I'm
-          constantly striving to push the boundaries of what is possible with code.
-        </p>
-        <div className="animate-on-scroll stagger-5 flex flex-col sm:flex-row items-final justify-between gap-4 mb-12">
-          {/* <Button size="lg" className="group">
-            View My Work
-            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </Button> */}
-          <div></div>
-          <Link href="#contact">
-            <Button size="lg">
-              Contact Me
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Button>
-          </Link>
-        </div>
-        <div className="animate-on-scroll stagger-5 flex items-center justify-center space-x-6">
-          <Link href="https://github.com/seergiorob" target="_blank" rel="noopener noreferrer">
-            <Github className="h-6 w-6 text-foreground/70 hover:text-primary transition-colors" />
-            <span className="sr-only">GitHub</span>
-          </Link>
-          <Link href="https://www.linkedin.com/in/sergio-robledo-9b1a33187/" target="_blank" rel="noopener noreferrer">
-            <Linkedin className="h-6 w-6 text-foreground/70 hover:text-primary transition-colors" />
-            <span className="sr-only">LinkedIn</span>
-          </Link>
-          <Link href="https://x.com/seergiorobledo" target="_blank" rel="noopener noreferrer">
-            <Twitter className="h-6 w-6 text-foreground/70 hover:text-primary transition-colors" />
-            <span className="sr-only">Twitter</span>
-          </Link>
+        {/* Photo side */}
+        <div className="w-full md:w-1/3 bg-[#131b2e] p-2 flex-shrink-0">
+          <Image
+            src="/images/profile.jpg"
+            alt="Sergio Robledo"
+            width={480}
+            height={640}
+            className="grayscale hover:grayscale-0 transition-all duration-700 w-full object-cover aspect-[3/4]"
+            priority
+          />
         </div>
       </div>
     </section>
