@@ -1,91 +1,87 @@
-"use client"
+const interests = [
+  "AI + Software Development",
+  "Developer Experience (DX)",
+  "Product-driven Engineering",
+  "System Design & Workflows",
+]
 
-import { useEffect, useRef } from "react"
-import Image from "next/image"
-import { Card, CardContent } from "@/components/ui/card"
-import SectionHeading from "./section-heading"
-import TypographicDivider from "./typographic-divider"
+const values = [
+  { icon: "bolt", label: "Fast Learner" },
+  { icon: "groups", label: "Team Player" },
+  { icon: "psychology", label: "Problem Solver" },
+  { icon: "code", label: "Clean Code" },
+]
 
 export default function AboutSection() {
-  const sectionRef = useRef<HTMLElement>(null)
-
-  console.log('test');
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("slide-in")
-          }
-        })
-      },
-      { threshold: 0.1 },
-    )
-
-    const elements = sectionRef.current?.querySelectorAll(".animate-on-scroll")
-    elements?.forEach((el) => observer.observe(el))
-
-    return () => {
-      elements?.forEach((el) => observer.unobserve(el))
-    }
-  }, [])
-
   return (
-    <section id="about" ref={sectionRef} className="py-20 px-4 sm:px-6 lg:px-8 bg-secondary/20 relative">
-     
-
-      <div className="max-w-6xl mx-auto">
-        <SectionHeading
-          title="About"
-          highlight="Me"
-          subtitle="Get to know more about my background and what drives me"
-        />
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="animate-on-scroll stagger-1 relative mx-auto md:ml-auto">
-            <div className="w-64 h-64 sm:w-80 sm:h-80 relative rounded-lg overflow-hidden border-2 border-primary/20">
-              <Image
-                src="/images/profile.jpg"
-                alt="Sergio Robledo"
-                width={320}
-                height={320}
-                className="object-cover"
-                priority
-              />
-            </div>
-            <div className="absolute -bottom-4 -right-4 w-full h-full border-2 border-primary rounded-lg -z-10"></div>
-            <div className="absolute -top-6 -left-6 text-4xl font-black text-primary/10">&lt;SR/&gt;</div>
+    <section id="about" className="px-8 py-24 bg-[#131b2e]">
+      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-20">
+        {/* Text */}
+        <div>
+          <h2 className="text-5xl font-headline font-bold tracking-tighter uppercase mb-12 text-white">
+            The Philosophy
+          </h2>
+          <div className="space-y-6 text-lg text-[#bcc9cd] font-light leading-relaxed">
+            <p>
+              I am a{" "}
+              <span className="text-white font-semibold">Frontend Developer</span> focused on
+              building scalable applications and improving how software is designed and developed —
+              from the first spec to the final deployment.
+            </p>
+            <p>
+              Recently, I&apos;ve been working deeply with{" "}
+              <span className="text-white font-semibold">Spec-Driven Development</span> and{" "}
+              <span className="text-white font-semibold">AI-augmented workflows</span>, exploring
+              how structured specifications and multi-agent systems can transform the development
+              process. I&apos;ve been designing and collaborating on Claude Code sub-agent
+              orchestration, custom skills, and knowledge-sharing systems across teams.
+            </p>
+            <p>
+              My focus is shifting from just writing code to{" "}
+              <span className="text-white font-semibold">
+                designing systems that enable teams to build better software faster
+              </span>
+              , with more consistency and clarity.
+            </p>
+            <p>
+              Alongside this, I&apos;m studying{" "}
+              <span className="text-white font-semibold">digital product management</span> —
+              strengthening my understanding of product strategy, user-centered problem solving, and
+              how to connect technical decisions with real product impact.
+            </p>
           </div>
 
-          <div>
-            <p className="animate-on-scroll stagger-2 text-lg mb-6 text-foreground/80">
-              Hello! I'm <span className="text-primary font-semibold">Sergio</span>, a passionate frontend developer
-              with a focus on creating visually appealing and user-friendly web applications. I'm constantly striving to
-              push the boundaries of what is possible with code.
-            </p>
-            <p className="animate-on-scroll stagger-3 text-lg mb-6 text-foreground/80">
-              Whether it's implementing cutting-edge technologies or finding new ways to improve the user experience,
-              I'm always up for a challenge. I specialize in frontend development with a focus on creating intuitive,
-              responsive, and accessible user interfaces.
-            </p>
-            <p className="animate-on-scroll stagger-4 text-lg mb-8 text-foreground/80">
-              You'll have the best of me working on startups or demanding projects. I thrive in environments that
-              challenge me to grow and innovate.
-            </p>
-
-            <TypographicDivider text="Core Values" className="animate-on-scroll stagger-4 mb-6" />
-
-            <div className="animate-on-scroll stagger-5 grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {["Problem Solver", "Team Player", "Fast Learner"].map((trait, index) => (
-                <Card key={index} className="bg-secondary/30 border-none">
-                  <CardContent className="p-4 text-center">
-                    <p className="font-medium text-primary">{trait}</p>
-                  </CardContent>
-                </Card>
+          {/* Interests */}
+          {/* <div className="mt-10">
+            <div className="font-mono text-xs uppercase tracking-[0.2em] text-[#869397] mb-4">
+              Currently Interested In
+            </div>
+            <div className="flex flex-col gap-2">
+              {interests.map((item) => (
+                <div key={item} className="flex items-center gap-3 text-[#bcc9cd] font-light">
+                  <span className="w-1.5 h-1.5 bg-primary flex-shrink-0" />
+                  {item}
+                </div>
               ))}
             </div>
-          </div>
+          </div> */}
+        </div>
+
+        {/* Values grid */}
+        <div className="grid grid-cols-2 gap-4 self-start">
+          {values.map(({ icon, label }) => (
+            <div
+              key={label}
+              className="bg-[#0b1326] p-8 flex flex-col justify-between aspect-square"
+            >
+              <span className="material-symbols-outlined text-primary text-4xl md:text-7xl">
+                {icon}
+              </span>
+              <div className="font-headline font-bold text-xl uppercase tracking-tighter text-white">
+                {label}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
