@@ -2,19 +2,19 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 
 const navItems = [
-  { name: "Home", href: "/" },
+  { name: "Work", href: "#about" },
+  { name: "Archive", href: "/blog" },
   { name: "About", href: "#about" },
-  { name: "Blog", href: "/blog"},
   { name: "Contact", href: "#contact" },
 ]
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [activeItem, setActiveItem] = useState("Work")
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,71 +27,76 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/80 backdrop-blur-md shadow-md" : "bg-transparent"
+        isScrolled ? "bg-[#0b1326]/80 backdrop-blur-xl shadow-md" : "bg-[#0b1326]/70 backdrop-blur-xl"
       }`}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          <div className="flex-shrink-0">
-            <Link href="/" className="text-xl font-bold text-primary tracking-tight relative group">
-              <span className="font-mono">SR</span>
-              <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary/50 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-            </Link>
-          </div>
+      <div className="flex justify-between items-center px-8 py-6">
+        <Link href="/" className="text-2xl font-black tracking-tighter text-white font-headline">
+          &lt;SR/&gt;
+        </Link>
 
-          {/* Desktop navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-foreground/80 hover:text-primary transition-colors duration-200 font-medium tracking-wide"
-              >
-                {item.name}
-              </Link>
-            ))}
-            <Button variant="outline" className="border-primary text-primary" asChild>
-              <a href="https://drive.google.com/file/d/1-EsyIGDqw-zvAQsONtGNfaivH6GcHMBc/view?usp=sharing" target="_blank" rel="noopener noreferrer">
-                Resume
-              </a>
-            </Button>
-          </nav>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle menu"
+        {/* Desktop navigation */}
+        <nav className="hidden md:flex items-center gap-12">
+          {navItems.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              onClick={() => setActiveItem(item.name)}
+              className={`font-headline uppercase tracking-tighter font-bold transition-colors text-sm ${
+                activeItem === item.name
+                  ? "text-primary border-b-2 border-primary pb-1"
+                  : "text-slate-400 hover:text-white"
+              }`}
             >
-              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
-          </div>
-        </div>
+              {item.name}
+            </Link>
+          ))}
+        </nav>
+
+        <a
+          href="https://drive.google.com/file/d/1-EsyIGDqw-zvAQsONtGNfaivH6GcHMBc/view?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden md:block bg-[#06b6d4] text-[#003640] px-6 py-2 font-headline font-bold uppercase tracking-widest text-sm hover:bg-transparent hover:text-primary border-2 border-transparent hover:border-primary transition-all duration-300"
+        >
+          CV
+        </a>
+
+        {/* Mobile menu button */}
+        <button
+          className="md:hidden text-white"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
       </div>
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-md">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <div className="md:hidden bg-[#0b1326]/95 backdrop-blur-xl border-t border-[#3d494c]">
+          <div className="px-8 py-6 space-y-4">
             {navItems.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="block px-3 py-2 text-foreground/80 hover:text-primary transition-colors duration-200 font-medium tracking-wide"
-                onClick={() => setMobileMenuOpen(false)}
+                className="block font-headline uppercase tracking-tighter font-bold text-slate-400 hover:text-white transition-colors"
+                onClick={() => {
+                  setActiveItem(item.name)
+                  setMobileMenuOpen(false)
+                }}
               >
                 {item.name}
               </Link>
             ))}
-            <div className="px-3 py-2">
-              <Button variant="outline" className="w-full border-primary text-primary" asChild>
-                <a href="https://drive.google.com/file/d/1-EsyIGDqw-zvAQsONtGNfaivH6GcHMBc/view?usp=sharing" target="_blank" rel="noopener noreferrer">
-                  Resume
-                </a>
-              </Button>
-            </div>
+            <a
+              href="https://drive.google.com/file/d/1-EsyIGDqw-zvAQsONtGNfaivH6GcHMBc/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block mt-4 bg-[#06b6d4] text-[#003640] px-6 py-2 font-headline font-bold uppercase tracking-widest text-sm text-center"
+            >
+              CV
+            </a>
           </div>
         </div>
       )}
